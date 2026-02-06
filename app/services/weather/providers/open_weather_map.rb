@@ -6,7 +6,7 @@ module Weather
       def initialize(api_key: API_KEY, units: "imperial")
         @api_key = api_key
         @units = units
-        @provider = OpenWeather::Client.new(api_key:)
+        @provider = OpenWeather::Client.new(api_key:, timeout: 5, open_timeout: 3)
       end
 
       def fetch_weather_from_zip(zip:, country: "US")
