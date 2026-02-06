@@ -10,8 +10,8 @@ RSpec.describe Weather::Providers::OpenWeatherMap do
       it "returns the weather data" do
         response = service.fetch_weather_from_zip(zip: 10018)
 
-        expect(response).to be_a(OpenWeather::Models::City::Weather)
-        expect(response.name).to eq("New York")
+        expect(response).to be_a(Weather::ForecastData)
+        expect(response.current.city).to eq("New York")
       end
     end
 

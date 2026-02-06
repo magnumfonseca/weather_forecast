@@ -10,12 +10,28 @@ module Weather
       end
 
       def fetch_weather_from_zip(zip:, country: "US")
-        provider.current_weather(zip:, country:, units:)
+        response = provider.current_weather(zip:, country:, units:)
+        forecast_data(response)
       end
 
       private
 
       attr_reader :api_key, :provider, :units
+
+      def forecast_data(response)
+        Weather::ForecastData.new(
+          current: Weather::ForecastData::CurrentWeather.new(
+            temperature_f: response.main.temp,
+            high_f: response.main.temp_max,
+            low_f: response.main.temp_min,
+            description: response.weather.first.description,
+            icon: response.weather.first.icon_uri,
+            city: response.name,
+            humidity: response.main.humidity,
+            wind_speed: response.wind.speed
+          )
+        )
+      end
     end
   end
 end
