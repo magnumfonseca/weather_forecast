@@ -1,0 +1,68 @@
+<div class="w-full max-w-md">
+  <h1 class="text-3xl font-bold text-gray-800 text-center mb-8">Weather Forecast</h1>
+
+  <div id="forecast-form" class="bg-white rounded-2xl shadow-md p-6 mb-6">
+    <%= form_with url: root_path, method: :get, data: { turbo_frame: "forecast_results" }, class: "space-y-4" do |f| %>
+      <div>
+        <%= f.label :zip_code, "Zip Code", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field :zip_code, placeholder: "e.g. 10018", value: params[:zip_code],
+            class: "w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" %>
+      </div>
+      <div>
+        <%= f.label :country, "Country", class: "block text-sm font-medium text-gray-700 mb-1" %>
+        <%= f.text_field :country, value: params[:country] || "US", maxlength: 2,
+            class: "w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 uppercase focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition" %>
+      </div>
+      <%= f.submit "Get Forecast",
+          class: "w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-4 rounded-lg transition cursor-pointer" %>
+    <% end %>
+  </div>
+
+  <%= turbo_frame_tag "forecast_results" do %>
+    <% if @error %>
+      <div id="forecast-error" class="bg-red-50 border border-red-200 text-red-700 rounded-2xl p-4 text-center">
+        <%= @error %>
+      </div>
+    <% elsif @forecast %>
+      <div id="forecast-data" class="bg-white rounded-2xl shadow-md p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h2 id="forecast-city" class="text-2xl font-bold text-gray-800"><%= @forecast.current.city %></h2>
+          <% if @cached %>
+            <span id="cache-indicator" class="text-xs font-medium bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full">Cached result</span>
+          <% else %>
+            <span id="cache-indicator" class="text-xs font-medium bg-green-100 text-green-700 px-2.5 py-1 rounded-full">Live result</span>
+          <% end %>
+        </div>
+
+        <div class="flex items-center gap-4 mb-6">
+          <% if @forecast.current.icon.present? %>
+            <%= image_tag @forecast.current.icon.to_s, alt: @forecast.current.description, class: "w-20 h-20" %>
+          <% end %>
+          <div>
+            <span id="forecast-temp" class="text-5xl font-light text-gray-900"><%= @forecast.current.temperature_f.round %>&deg;F</span>
+            <p class="text-gray-500 capitalize mt-1"><%= @forecast.current.description %></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 border-t border-gray-100 pt-4">
+          <div class="text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-wide">High</p>
+            <p class="text-lg font-semibold text-gray-800"><%= @forecast.current.high_f.round %>&deg;F</p>
+          </div>
+          <div class="text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Low</p>
+            <p class="text-lg font-semibold text-gray-800"><%= @forecast.current.low_f.round %>&deg;F</p>
+          </div>
+          <div class="text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Humidity</p>
+            <p class="text-lg font-semibold text-gray-800"><%= @forecast.current.humidity %>%</p>
+          </div>
+          <div class="text-center">
+            <p class="text-xs text-gray-500 uppercase tracking-wide">Wind</p>
+            <p class="text-lg font-semibold text-gray-800"><%= @forecast.current.wind_speed %> mph</p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
