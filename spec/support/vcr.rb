@@ -16,13 +16,13 @@ VCR.configure do |c|
   # Scrub API key from request URIs when recording
   c.before_record do |interaction|
     if interaction.request.uri
-      interaction.request.uri = interaction.request.uri&.gsub!(/appid=[^&\s]+/, 'appid=<OPENWEATHER_API_KEY>')
+      interaction.request.uri = interaction.request.uri.gsub(/appid=[^&\s]+/, 'appid=<OPENWEATHER_API_KEY>')
     end
     if interaction.request.body
-      interaction.request.body = interaction.request.body&.gsub!(/appid=[^&\s]+/, 'appid=<OPENWEATHER_API_KEY>')
+      interaction.request.body = interaction.request.body.gsub(/appid=[^&\s]+/, 'appid=<OPENWEATHER_API_KEY>')
     end
     if interaction.response && interaction.response.body
-      interaction.response.body = interaction.response.body&.gsub!(/appid=[^&\s]+/, 'appid=<OPENWEATHER_API_KEY>')
+      interaction.response.body = interaction.response.body.gsub(/appid=[^&\s]+/, 'appid=<OPENWEATHER_API_KEY>')
     end
   end
 end

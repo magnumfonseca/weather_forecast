@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.openweathermap.org/data/2.5/weather?appid=<OPENWEATHER_API_KEY>&units=imperial&zip=10018,US
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenWeather Ruby Client/0.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 06 Feb 2026 02:27:54 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '496'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/data/2.5/weather?units=imperial&zip=10018%2cus"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"coord":{"lon":-73.9925,"lat":40.7547},"weather":[{"id":800,"main":"Clear","description":"clear
+        sky","icon":"01n"}],"base":"stations","main":{"temp":27.86,"feels_like":21.52,"temp_min":21.11,"temp_max":28.62,"pressure":1015,"humidity":47,"sea_level":1015,"grnd_level":1013},"visibility":10000,"wind":{"speed":5.75,"deg":50},"clouds":{"all":0},"dt":1770344874,"sys":{"type":1,"id":5141,"country":"US","sunrise":1770292924,"sunset":1770329874},"timezone":-18000,"id":0,"name":"New
+        York","cod":200}'
+  recorded_at: Fri, 06 Feb 2026 02:27:54 GMT
+recorded_with: VCR 6.4.0

@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.openweathermap.org/data/2.5/weather?appid=<OPENWEATHER_API_KEY>&units=imperial&zip=10115,DE
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenWeather Ruby Client/0.6.0
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 06 Feb 2026 02:27:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '484'
+      Connection:
+      - keep-alive
+      X-Cache-Key:
+      - "/data/2.5/weather?units=imperial&zip=10115%2cde"
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST
+    body:
+      encoding: UTF-8
+      string: '{"coord":{"lon":13.3922,"lat":52.532},"weather":[{"id":701,"main":"Mist","description":"mist","icon":"50n"}],"base":"stations","main":{"temp":30.92,"feels_like":23.5,"temp_min":30.09,"temp_max":31.87,"pressure":994,"humidity":95,"sea_level":994,"grnd_level":988},"visibility":2900,"wind":{"speed":8.05,"deg":80},"clouds":{"all":100},"dt":1770344879,"sys":{"type":2,"id":2011538,"country":"DE","sunrise":1770360012,"sunset":1770393649},"timezone":3600,"id":0,"name":"Berlin","cod":200}'
+  recorded_at: Fri, 06 Feb 2026 02:27:59 GMT
+recorded_with: VCR 6.4.0
